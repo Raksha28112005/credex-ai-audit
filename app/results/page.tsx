@@ -14,6 +14,11 @@ type AuditData = {
 
 export default function ResultsPage() {
   const [data, setData] = useState<AuditData | null>(null);
+  const [email, setEmail] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [role, setRole] = useState("");
+  const [captureTeamSize, setCaptureTeamSize] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const savedData = localStorage.getItem("audit-form");
@@ -41,50 +46,43 @@ export default function ResultsPage() {
     2
   )} per year. ${audit.reason}`;
 
+  const handleSave = async () => {
+    if (!email) {
+      setMessage("Please enter your email.");
+      return;
+    }
+
+    setMessage("Your audit has been saved successfully!");
+
+    setEmail("");
+    setCompanyName("");
+    setRole("");
+    setCaptureTeamSize("");
+  };
+
   return (
     <main className="min-h-screen bg-black text-white p-6">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-5xl font-bold mb-8">Audit Results</h1>
 
         <div className="bg-zinc-900 rounded-3xl p-8 space-y-4">
-          <p>
-            <strong>Tool:</strong> {data.tool}
-          </p>
-
-          <p>
-            <strong>Current Plan:</strong> {data.plan || "Not specified"}
-          </p>
-
-          <p>
-            <strong>Monthly Spend:</strong> ${data.monthlySpend}
-          </p>
-
-          <p>
-            <strong>Seats:</strong> {data.seats}
-          </p>
-
-          <p>
-            <strong>Team Size:</strong> {data.teamSize}
-          </p>
-
-          <p>
-            <strong>Primary Use Case:</strong> {data.useCase}
-          </p>
+          <p><strong>Tool:</strong> {data.tool}</p>
+          <p><strong>Current Plan:</strong> {data.plan || "Not specified"}</p>
+          <p><strong>Monthly Spend:</strong> ${data.monthlySpend}</p>
+          <p><strong>Seats:</strong> {data.seats}</p>
+          <p><strong>Team Size:</strong> {data.teamSize}</p>
+          <p><strong>Primary Use Case:</strong> {data.useCase}</p>
 
           <hr className="border-zinc-700 my-6" />
 
-          <p>
-            <strong>Recommended Plan:</strong> {audit.recommendedPlan}
-          </p>
+          <p><strong>Recommended Plan:</strong> {audit.recommendedPlan}</p>
 
           <h2 className="text-3xl font-bold">
-            Estimated Monthly Savings: $
-            {audit.monthlySavings.toFixed(2)}
+            Estimated Monthly Savings: ${audit.monthlySavings.toFixed(2)}
           </h2>
 
           <h3 className="text-2xl text-green-400">
-            Estimated Annual Savings: $
-            {audit.annualSavings.toFixed(2)}
+            Estimated Annual Savings: ${audit.annualSavings.toFixed(2)}
           </h3>
 
           <p className="text-gray-300">{audit.reason}</p>
@@ -93,28 +91,59 @@ export default function ResultsPage() {
             <h3 className="text-xl font-semibold mb-3">
               Personalized AI Summary
             </h3>
-
-            <p className="text-gray-300 leading-7">
-              {summary}
-            </p>
+            <p className="text-gray-300 leading-7">{summary}</p>
           </div>
+        </div>
 
-          {audit.monthlySavings > 500 && (
-            <div className="mt-6 p-4 bg-green-900/30 border border-green-700 rounded-xl">
-              <p className="font-semibold text-green-300">
-                You could save significantly. Credex may help you reduce costs
-                even further through discounted AI credits.
-              </p>
-            </div>
-          )}
+        <div className="mt-10 bg-zinc-900 rounded-3xl p-8 border border-zinc-800">
+          <h2 className="text-3xl font-bold mb-6">
+            Get Your Audit by Email
+          </h2>
 
-          {audit.monthlySavings === 0 && (
-            <div className="mt-6 p-4 bg-blue-900/30 border border-blue-700 rounded-xl">
-              <p className="text-blue-300">
-                Your current setup appears well optimized.
-              </p>
-            </div>
-          )}
+          <div className="grid gap-4">
+            <input
+              type="email"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="bg-zinc-800 p-4 rounded-xl outline-none"
+            />
+
+            <input
+              type="text"
+              placeholder="Company Name"
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
+              className="bg-zinc-800 p-4 rounded-xl outline-none"
+            />
+
+            <input
+              type="text"
+              placeholder="Your Role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="bg-zinc-800 p-4 rounded-xl outline-none"
+            />
+
+            <input
+              type="number"
+              placeholder="Team Size"
+              value={captureTeamSize}
+              onChange={(e) => setCaptureTeamSize(e.target.value)}
+              className="bg-zinc-800 p-4 rounded-xl outline-none"
+            />
+
+            <button
+              onClick={handleSave}
+              className="bg-white text-black py-4 rounded-xl font-semibold hover:scale-105 transition"
+            >
+              Email My Audit
+            </button>
+
+            {message && (
+              <p className="text-gray-300 mt-2">{message}</p>
+            )}
+          </div>
         </div>
       </div>
     </main>
