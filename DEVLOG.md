@@ -46,3 +46,20 @@ Need to improve the visual design and add AI-generated summaries.
 
 **Plan for tomorrow:**  
 Integrate an LLM-generated summary and redesign the results page for better presentation.
+
+
+## Day 4 — 2026-05-10
+
+**Hours worked:** 4
+
+**What I did:**  
+Enhanced the audit results page by adding a personalized AI summary section based on the audit calculations. Created PROMPTS.md to document the prompt design and fallback summary strategy.
+
+**What I learned:**  
+I learned how to generate dynamic summaries from structured data and present recommendations in a more polished and user-friendly format.
+
+**Blockers / what I'm stuck on:**  
+Need to set up a real backend to store leads and collect email addresses after users view their audit.
+
+**Plan for tomorrow:**  
+Integrate Supabase, create a lead capture form, and store audit submissions in a database.

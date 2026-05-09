@@ -31,8 +31,15 @@ export default function ResultsPage() {
     );
   }
 
-  // Run the real audit logic
   const audit = runAudit(data);
+
+  const summary = `Your current ${data.tool} setup on the ${
+    data.plan || "current"
+  } plan could save $${audit.monthlySavings.toFixed(
+    2
+  )} per month and $${audit.annualSavings.toFixed(
+    2
+  )} per year. ${audit.reason}`;
 
   return (
     <main className="min-h-screen bg-black text-white p-6">
@@ -81,6 +88,16 @@ export default function ResultsPage() {
           </h3>
 
           <p className="text-gray-300">{audit.reason}</p>
+
+          <div className="mt-6 bg-zinc-800 rounded-2xl p-6 border border-zinc-700">
+            <h3 className="text-xl font-semibold mb-3">
+              Personalized AI Summary
+            </h3>
+
+            <p className="text-gray-300 leading-7">
+              {summary}
+            </p>
+          </div>
 
           {audit.monthlySavings > 500 && (
             <div className="mt-6 p-4 bg-green-900/30 border border-green-700 rounded-xl">
