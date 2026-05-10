@@ -63,3 +63,32 @@ Need to set up a real backend to store leads and collect email addresses after u
 
 **Plan for tomorrow:**  
 Integrate Supabase, create a lead capture form, and store audit submissions in a database.
+
+## Day 5 — Supabase Lead Capture Integration
+
+**Hours worked:** 6
+
+**What I did:**
+- Created a Supabase project
+- Created the `leads` table
+- Added environment variables to `.env.local`
+- Installed `@supabase/supabase-js`
+- Created `lib/supabase.ts`
+- Built the lead capture form
+- Connected the form to Supabase
+- Configured Row Level Security (RLS) policies
+- Verified that form submissions are saved in the database
+
+**What I learned:**
+I learned how to connect a Next.js application to Supabase, insert records into a PostgreSQL database, and configure Row Level Security policies to allow public inserts.
+
+**Blockers / Challenges:**
+- Module import errors with `LeadCapture`
+- Incorrect file naming (`superbase.ts` vs `supabase.ts`)
+- Row Level Security policy blocking inserts
+
+**Outcome:**
+Successfully saved lead data (email, company name, role, and team size) into the Supabase `leads` table.
+
+**Plan for Tomorrow:**
+Continue testing, polish the UI, and prepare the application for deployment.

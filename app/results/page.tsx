@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { runAudit } from "@/lib/audit";
+import { supabase } from "@/lib/supabase";
 
 type AuditData = {
   tool: string;
@@ -14,15 +15,16 @@ type AuditData = {
 
 export default function ResultsPage() {
   const [data, setData] = useState<AuditData | null>(null);
+
   const [email, setEmail] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [role, setRole] = useState("");
   const [captureTeamSize, setCaptureTeamSize] = useState("");
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     const savedData = localStorage.getItem("audit-form");
-
     if (savedData) {
       setData(JSON.parse(savedData));
     }
@@ -46,18 +48,38 @@ export default function ResultsPage() {
     2
   )} per year. ${audit.reason}`;
 
-  const handleSave = async () => {
+  const handleSubmit = async () => {
     if (!email) {
       setMessage("Please enter your email.");
       return;
     }
 
-    setMessage("Your audit has been saved successfully!");
+    setLoading(true);
+    setMessage("");
 
-    setEmail("");
-    setCompanyName("");
-    setRole("");
-    setCaptureTeamSize("");
+    const { error } = await supabase.from("leads").insert([
+      {
+        email,
+        company_name: companyName,
+        role,
+        team_size: captureTeamSize
+          ? Number(captureTeamSize)
+          : null,
+      },
+    ]);
+
+    if (error) {
+      console.error(error);
+      setMessage(`Database error: ${error.message}`);
+    } else {
+      setMessage("Your audit has been saved successfully!");
+      setEmail("");
+      setCompanyName("");
+      setRole("");
+      setCaptureTeamSize("");
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -78,11 +100,13 @@ export default function ResultsPage() {
           <p><strong>Recommended Plan:</strong> {audit.recommendedPlan}</p>
 
           <h2 className="text-3xl font-bold">
-            Estimated Monthly Savings: ${audit.monthlySavings.toFixed(2)}
+            Estimated Monthly Savings: $
+            {audit.monthlySavings.toFixed(2)}
           </h2>
 
           <h3 className="text-2xl text-green-400">
-            Estimated Annual Savings: ${audit.annualSavings.toFixed(2)}
+            Estimated Annual Savings: $
+            {audit.annualSavings.toFixed(2)}
           </h3>
 
           <p className="text-gray-300">{audit.reason}</p>
@@ -134,10 +158,11 @@ export default function ResultsPage() {
             />
 
             <button
-              onClick={handleSave}
-              className="bg-white text-black py-4 rounded-xl font-semibold hover:scale-105 transition"
+              onClick={handleSubmit}
+              disabled={loading}
+              className="bg-white text-black py-4 rounded-xl font-semibold hover:scale-105 transition disabled:opacity-50"
             >
-              Email My Audit
+              {loading ? "Saving..." : "Email My Audit"}
             </button>
 
             {message && (

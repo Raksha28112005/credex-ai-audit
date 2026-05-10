@@ -30,6 +30,7 @@ export default function LeadCapture() {
     ]);
 
     if (error) {
+      console.error(error);
       setMessage("Something went wrong. Please try again.");
     } else {
       setMessage("Your audit has been saved successfully!");
