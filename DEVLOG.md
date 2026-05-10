@@ -92,3 +92,17 @@ Successfully saved lead data (email, company name, role, and team size) into the
 
 **Plan for Tomorrow:**
 Continue testing, polish the UI, and prepare the application for deployment.
+
+
+## Day 6 — Vercel Deployment
+
+**Hours worked:** 3
+
+**What I did:**
+Connected the GitHub repository to Vercel, added Supabase environment variables, deployed the Next.js application, and tested the live website.
+
+**What I learned:**
+I learned how to deploy a Next.js application to Vercel and configure environment variables for production.
+
+**Outcome:**
+Successfully deployed the AI Spend Audit application and obtained a public URL.
