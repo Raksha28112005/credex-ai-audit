@@ -6,6 +6,19 @@ AI Spend Audit is a web application that helps companies analyze their AI tool s
 
 https://credex-ai-audit-snowy.vercel.app/
 
+
+## Screenshots
+
+### Home Page
+
+<img width="802" height="693" alt="output1" src="https://github.com/user-attachments/assets/ad3b6ae0-1503-4223-ac6a-f6afd88f9d0a" />
+
+### Audit Results
+<img width="677" height="677" alt="output2" src="https://github.com/user-attachments/assets/fe6da49d-7faf-488f-9b3a-2fb94c711fb6" />
+
+### Shared Audit Report
+<img width="856" height="548" alt="utput4" src="https://github.com/user-attachments/assets/ff62c7c7-cfcf-44c7-a797-82d6cecd500d" />
+
 ## Features
 
 - AI subscription cost analysis
