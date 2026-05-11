@@ -106,3 +106,19 @@ I learned how to deploy a Next.js application to Vercel and configure environmen
 
 **Outcome:**
 Successfully deployed the AI Spend Audit application and obtained a public URL.
+
+## Day 7 — Final Review and Submission
+
+**Hours worked:** 4
+
+**What I did:**
+Tested the deployed application, reviewed all required documentation files, verified GitHub Actions, and prepared the final submission.
+
+**What I learned:**
+I learned how to package a complete project for evaluation, ensuring code, documentation, deployment, and testing are all production-ready.
+
+**Blockers / what I'm stuck on:**
+No major blockers. Focused on final verification and polish.
+
+**Plan for tomorrow:**
+Submit the assignment and wait for feedback.
