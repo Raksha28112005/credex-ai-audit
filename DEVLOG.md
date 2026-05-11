@@ -1,124 +1,88 @@
-## Day 1 — 2026-05-07
-
+## Day 1 — 2026-05-05
 **Hours worked:** 4
 
-**What I did:**  
-Set up the project using Next.js, TypeScript, and Tailwind CSS. Connected the project to GitHub and created the initial landing page and audit form UI for the AI Spend Audit application.
+**What I did:** Set up the Next.js project with TypeScript and Tailwind CSS. Created the homepage form to collect AI tool usage details such as tool name, plan, monthly spend, seats, team size, and primary use case.
 
-**What I learned:**  
-I learned how modern SaaS applications are structured and understood the importance of setting up a clean project architecture before building features.
+**What I learned:** Learned how to initialize a Next.js project, organize the App Router structure, and build forms with React state.
 
-**Blockers / what I'm stuck on:**  
-Still researching the best way to structure pricing comparison logic for multiple AI vendors and plans.
+**Blockers / what I'm stuck on:** I was initially confused about how to store form data and pass it to the results page.
 
-**Plan for tomorrow:**  
-Implement dynamic form functionality, add persistent form state, and begin building the audit recommendation logic.
+**Plan for tomorrow:** Implement the audit calculation logic and create the results page.
 
+---
 
-## Day 2 — 2026-05-08
+## Day 2 — 2026-05-06
+**Hours worked:** 5
 
-**Hours worked:** 4
+**What I did:** Built the `runAudit()` function in `lib/audit.ts` to calculate recommended plans, alternative tools, and estimated monthly and annual savings. Created the results page to display the audit output.
 
-**What I did:**  
-Converted the landing page into a fully functional controlled form using React state. Added localStorage persistence so form data remains after page refresh. Implemented form validation and created a results page that displays the submitted data and estimated savings.
+**What I learned:** Learned how to create reusable TypeScript functions and conditionally render calculated results.
 
-**What I learned:**  
-I learned how to use React state to manage form inputs, persist data in the browser using localStorage, and navigate between pages using the Next.js App Router.
+**Blockers / what I'm stuck on:** Savings were initially showing as zero because the logic only handled a narrow case.
 
-**Blockers / what I'm stuck on:**  
-I needed to understand how to structure the audit logic separately from the UI so that recommendations could be generated consistently.
+**Plan for tomorrow:** Integrate Supabase for lead capture and public shareable URLs.
 
-**Plan for tomorrow:**  
-Build the rule-based audit engine, connect it to the results page, and replace placeholder savings with actual calculations based on pricing data.
+---
 
-## Day 3 — 2026-05-09
-
-**Hours worked:** 4
-
-**What I did:**  
-Implemented the rule-based audit engine and connected it to the results page. Added real savings calculations and documented pricing sources.
-
-**What I learned:**  
-I learned how to separate business logic from UI and build deterministic recommendation rules.
-
-**Blockers / what I'm stuck on:**  
-Need to improve the visual design and add AI-generated summaries.
-
-**Plan for tomorrow:**  
-Integrate an LLM-generated summary and redesign the results page for better presentation.
-
-
-## Day 4 — 2026-05-10
-
-**Hours worked:** 4
-
-**What I did:**  
-Enhanced the audit results page by adding a personalized AI summary section based on the audit calculations. Created PROMPTS.md to document the prompt design and fallback summary strategy.
-
-**What I learned:**  
-I learned how to generate dynamic summaries from structured data and present recommendations in a more polished and user-friendly format.
-
-**Blockers / what I'm stuck on:**  
-Need to set up a real backend to store leads and collect email addresses after users view their audit.
-
-**Plan for tomorrow:**  
-Integrate Supabase, create a lead capture form, and store audit submissions in a database.
-
-## Day 5 — Supabase Lead Capture Integration
-
+## Day 3 — 2026-05-07
 **Hours worked:** 6
 
-**What I did:**
-- Created a Supabase project
-- Created the `leads` table
-- Added environment variables to `.env.local`
-- Installed `@supabase/supabase-js`
-- Created `lib/supabase.ts`
-- Built the lead capture form
-- Connected the form to Supabase
-- Configured Row Level Security (RLS) policies
-- Verified that form submissions are saved in the database
+**What I did:** Connected Supabase to the project. Created the `leads` table and implemented the email capture form. Added Row Level Security policies to allow public inserts.
 
-**What I learned:**
-I learned how to connect a Next.js application to Supabase, insert records into a PostgreSQL database, and configure Row Level Security policies to allow public inserts.
+**What I learned:** Learned how to use Supabase as a backend database and configure Row Level Security policies.
 
-**Blockers / Challenges:**
-- Module import errors with `LeadCapture`
-- Incorrect file naming (`superbase.ts` vs `supabase.ts`)
-- Row Level Security policy blocking inserts
+**Blockers / what I'm stuck on:** Encountered a `42501` Row Level Security error that prevented inserts until policies were added.
 
-**Outcome:**
-Successfully saved lead data (email, company name, role, and team size) into the Supabase `leads` table.
+**Plan for tomorrow:** Build the `shared_audits` table and implement public share URLs.
 
-**Plan for Tomorrow:**
-Continue testing, polish the UI, and prepare the application for deployment.
+---
 
+## Day 4 — 2026-05-08
+**Hours worked:** 6
 
-## Day 6 — Vercel Deployment
+**What I did:** Created the `shared_audits` table in Supabase and implemented public share URLs (`/share/[id]`). Added Open Graph and Twitter Card metadata so shared links display rich previews.
 
-**Hours worked:** 3
+**What I learned:** Learned how to create dynamic routes in Next.js and generate metadata for social previews.
 
-**What I did:**
-Connected the GitHub repository to Vercel, added Supabase environment variables, deployed the Next.js application, and tested the live website.
+**Blockers / what I'm stuck on:** Ran into a React Hooks ordering issue and fixed it by ensuring all hooks are declared before conditional returns.
 
-**What I learned:**
-I learned how to deploy a Next.js application to Vercel and configure environment variables for production.
+**Plan for tomorrow:** Add PDF export and benchmark mode.
 
-**Outcome:**
-Successfully deployed the AI Spend Audit application and obtained a public URL.
+---
 
-## Day 7 — Final Review and Submission
+## Day 5 — 2026-05-09
+**Hours worked:** 5
 
-**Hours worked:** 4
+**What I did:** Added PDF export using jsPDF. Implemented Benchmark Mode to compare spend per developer with an industry estimate. Added referral code support.
 
-**What I did:**
-Tested the deployed application, reviewed all required documentation files, verified GitHub Actions, and prepared the final submission.
+**What I learned:** Learned how to generate PDF files directly in the browser and add additional product-focused features.
 
-**What I learned:**
-I learned how to package a complete project for evaluation, ensuring code, documentation, deployment, and testing are all production-ready.
+**Blockers / what I'm stuck on:** Needed to adjust PDF formatting so long summaries fit correctly.
 
-**Blockers / what I'm stuck on:**
-No major blockers. Focused on final verification and polish.
+**Plan for tomorrow:** Create documentation files and launch materials.
 
-**Plan for tomorrow:**
-Submit the assignment and wait for feedback.
+---
+
+## Day 6 — 2026-05-10
+**Hours worked:** 5
+
+**What I did:** Created README.md, ARCHITECTURE.md, LAUNCH_POST.md, and WIDGET.md. Added deployment instructions and architecture diagrams.
+
+**What I learned:** Learned how to write technical documentation that explains design decisions and system architecture.
+
+**Blockers / what I'm stuck on:** Formatting Mermaid diagrams correctly in Markdown.
+
+**Plan for tomorrow:** Final testing, deployment verification, and submission.
+
+---
+
+## Day 7 — 2026-05-11
+**Hours worked:** 6
+
+**What I did:** Tested all features, fixed remaining bugs, updated GitHub, and verified the Vercel deployment. Confirmed that shareable URLs, PDF export, benchmark mode, referral codes, and metadata all work.
+
+**What I learned:** Learned how to debug full-stack applications and deploy production-ready web applications.
+
+**Blockers / what I'm stuck on:** No major blockers after final fixes.
+
+**Plan for tomorrow:** Submit the completed assignment and monitor feedback.
